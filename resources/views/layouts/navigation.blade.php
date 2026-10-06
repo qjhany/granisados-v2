@@ -89,6 +89,10 @@
 
                     <x-slot name="content">
 
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Mi perfil') }}
+                        </x-dropdown-link>
+
                         <!-- Logout -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -205,6 +209,10 @@
             </div>
 
             <div class="mt-3 space-y-1">
+
+                <x-responsive-nav-link :href="route('profile.edit')">
+                    {{ __('Mi perfil') }}
+                </x-responsive-nav-link>
 
                 <!-- Logout -->
                 <form method="POST" action="{{ route('logout') }}">
