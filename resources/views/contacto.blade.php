@@ -3,170 +3,82 @@
 @section('title', 'Contacto')
 
 @section('content')
-
-<!-- HERO -->
-<section class="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white py-20">
-
-    <div class="max-w-6xl mx-auto text-center px-6">
-
-        <h1 class="text-6xl font-extrabold mb-6">
-            ☎️ Contáctanos ☎️
-        </h1>
-
-        <p class="text-2xl font-semibold">
-            Estamos listos para atenderte y resolver tus dudas 😵🍧
-        </p>
-
+<section class="bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 py-16 text-white">
+    <div class="mx-auto max-w-6xl px-6 text-center">
+        <h1 class="text-5xl font-extrabold">Contáctanos 🍧</h1>
+        <p class="mt-4 text-xl font-semibold">Estamos listos para atenderte y resolver tus dudas.</p>
     </div>
-
 </section>
 
-<!-- CONTACTO -->
-<section class="py-20 bg-gray-100">
+<section class="bg-gray-100 py-16">
+    <div class="mx-auto max-w-6xl px-6">
+        @if (session('success'))
+            <div class="mb-8 rounded-2xl border border-green-200 bg-green-100 p-5 font-semibold text-green-800" role="status">
+                {{ session('success') }}
+            </div>
+        @endif
 
-    <div class="max-w-5xl mx-auto px-6">
-
-        <div class="grid md:grid-cols-2 gap-10">
-
-            <!-- INFORMACIÓN -->
-            <div class="bg-white rounded-3xl shadow-2xl p-10">
-
-                <h2 class="text-4xl font-extrabold text-gray-800 mb-6">
-                    📞 Información de Contacto
-                </h2>
-
-                <p class="text-gray-600 text-lg leading-relaxed mb-8">
-                    Puedes comunicarte con nosotros a través de nuestros
-                    canales oficiales y redes sociales 💜
-                </p>
-
-                <div class="space-y-6">
-
-                    <div class="bg-pink-100 p-5 rounded-2xl">
-                        <h3 class="text-2xl font-bold text-pink-600 mb-2">
-                            📸 Instagram
-                        </h3>
-
-                        <p class="text-gray-700 text-lg">
-                            💙 richard_y3la
-                        </p>
-
-                        <p class="text-gray-700 text-lg">
-                            💚 jhanyela117
-                        </p>
+        <div class="grid gap-10 md:grid-cols-2">
+            <div class="rounded-3xl bg-white p-10 shadow-xl">
+                <h2 class="mb-6 text-3xl font-extrabold text-gray-800">Información de contacto</h2>
+                <div class="space-y-6 text-lg text-gray-700">
+                    <div class="rounded-2xl bg-pink-100 p-5">
+                        <h3 class="font-bold text-pink-700">Instagram</h3>
+                        <p>@richard_y3la · @jhanyela117</p>
                     </div>
-
-                    <div class="bg-blue-100 p-5 rounded-2xl">
-                        <h3 class="text-2xl font-bold text-blue-600 mb-2">
-                            📍 Ubicación
-                        </h3>
-
-                        <p class="text-gray-700 text-lg">
-                            Pasto - Nariño
-                        </p>
+                    <div class="rounded-2xl bg-blue-100 p-5">
+                        <h3 class="font-bold text-blue-700">Ubicación</h3>
+                        <p>Pasto, Nariño</p>
                     </div>
-
-                    <div class="bg-yellow-100 p-5 rounded-2xl">
-                        <h3 class="text-2xl font-bold text-yellow-600 mb-2">
-                            ⏰ Horarios
-                        </h3>
-
-                        <p class="text-gray-700 text-lg">
-                            Lunes a Domingo
-                        </p>
-
-                        <p class="text-gray-700 text-lg">
-                            10:00 AM - 10:00 PM
-                        </p>
+                    <div class="rounded-2xl bg-yellow-100 p-5">
+                        <h3 class="font-bold text-yellow-700">Horario</h3>
+                        <p>Lunes a domingo, 10:00 a. m. – 10:00 p. m.</p>
                     </div>
-
                 </div>
-
             </div>
 
-            <!-- FORMULARIO -->
-            <div class="bg-white rounded-3xl shadow-2xl p-10">
+            <div class="rounded-3xl bg-white p-10 shadow-xl">
+                <h2 class="mb-8 text-center text-3xl font-extrabold text-gray-800">Envíanos un mensaje</h2>
 
-                <h2 class="text-4xl font-extrabold text-gray-800 mb-8 text-center">
-                    ✉️ Envíanos un mensaje
-                </h2>
-
-                <form class="space-y-6">
-
-                    <!-- Nombre -->
-                    <div>
-
-                        <label class="block text-lg font-semibold mb-2">
-                            Nombre
+                <form method="POST" action="{{ route('pqrs.store') }}" class="space-y-5">
+                    @csrf
+                    <div class="grid gap-5 sm:grid-cols-2">
+                        <label class="font-semibold text-gray-700">Nombres
+                            <input name="nombres" value="{{ old('nombres') }}" required maxlength="100" autocomplete="given-name" class="mt-2 w-full rounded-xl border-gray-300" type="text">
+                            @error('nombres')<span class="mt-1 block text-sm text-red-600">{{ $message }}</span>@enderror
                         </label>
-
-                        <input type="text"
-                               placeholder="Ingresa tu nombre"
-                               class="w-full rounded-2xl border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500">
-
+                        <label class="font-semibold text-gray-700">Apellidos
+                            <input name="apellidos" value="{{ old('apellidos') }}" required maxlength="100" autocomplete="family-name" class="mt-2 w-full rounded-xl border-gray-300" type="text">
+                            @error('apellidos')<span class="mt-1 block text-sm text-red-600">{{ $message }}</span>@enderror
+                        </label>
                     </div>
 
-                    <!-- Correo -->
-                    <div>
+                    <label class="block font-semibold text-gray-700">Correo electrónico
+                        <input name="correo" value="{{ old('correo') }}" required maxlength="150" autocomplete="email" class="mt-2 w-full rounded-xl border-gray-300" type="email">
+                        @error('correo')<span class="mt-1 block text-sm text-red-600">{{ $message }}</span>@enderror
+                    </label>
 
-                        <label class="block text-lg font-semibold mb-2">
-                            Correo electrónico
-                        </label>
-
-                        <input type="email"
-                               placeholder="Ingresa tu correo"
-                               class="w-full rounded-2xl border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500">
-
-                    </div>
-
-                    <!-- Motivo -->
-                    <div>
-
-                        <label class="block text-lg font-semibold mb-2">
-                            Motivo de contacto
-                        </label>
-
-                        <select
-                            class="w-full rounded-2xl border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500">
-
-                            <option>Consulta</option>
-                            <option>Pedido</option>
-                            <option>Sugerencia</option>
-                            <option>Otro</option>
-
+                    <label class="block font-semibold text-gray-700">Tipo de solicitud
+                        <select name="tipo" required class="mt-2 w-full rounded-xl border-gray-300">
+                            <option value="">Selecciona una opción</option>
+                            @foreach (['Queja', 'Petición', 'Felicitación'] as $tipo)
+                                <option value="{{ $tipo }}" @selected(old('tipo') === $tipo)>{{ $tipo }}</option>
+                            @endforeach
                         </select>
+                        @error('tipo')<span class="mt-1 block text-sm text-red-600">{{ $message }}</span>@enderror
+                    </label>
 
-                    </div>
+                    <label class="block font-semibold text-gray-700">Mensaje
+                        <textarea name="mensaje" required minlength="10" maxlength="2000" rows="6" class="mt-2 w-full rounded-xl border-gray-300">{{ old('mensaje') }}</textarea>
+                        @error('mensaje')<span class="mt-1 block text-sm text-red-600">{{ $message }}</span>@enderror
+                    </label>
 
-                    <!-- Mensaje -->
-                    <div>
-
-                        <label class="block text-lg font-semibold mb-2">
-                            Mensaje
-                        </label>
-
-                        <textarea rows="5"
-                                  placeholder="Escribe tu mensaje"
-                                  class="w-full rounded-2xl border-gray-300 shadow-sm focus:ring-cyan-500 focus:border-cyan-500"></textarea>
-
-                    </div>
-
-                    <!-- Botón -->
-                    <button type="submit"
-                            class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-4 rounded-2xl text-xl font-bold shadow-lg hover:scale-105 transition duration-300">
-
-                        🚀 Enviar mensaje
-
+                    <button type="submit" class="w-full rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 py-4 text-lg font-bold text-white shadow-lg hover:opacity-90">
+                        Enviar mensaje
                     </button>
-
                 </form>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
-
 @endsection
